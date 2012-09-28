@@ -1,0 +1,34 @@
+<scenario>
+	
+	<environment>
+		<tag type="bool" name="env tag" value="false"/>
+	</environment>
+	
+	<snapshot id="0">
+	
+		<world>
+			<tag type="bool" name="world tag" value="false"/>
+		</world>
+		
+		<node id="runner12">
+			<location x="135.0" y="5.0" z="0.0"/>
+			
+			<!-- Simple Boolean Tag -->
+			<tag type="bool" name="base station" value="false"/>
+			
+			<!-- Tag group containing other Tags -->
+			<tag type="group" name="marathonnet">
+			
+				<!-- Map Tag that maps one floating-point value to another -->
+					<tag type="map-double-double" name="split times">
+						<entry index="0" value="0"/>
+						<entry index="21097.5" value="3801.0"/>
+						<entry index="42195" value="7658.0"/>
+					</tag>
+			 
+			</tag>
+			
+		</node>
+	</snapshot>
+	
+</scenario>

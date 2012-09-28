@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="urn:ControllerService"
+		   xmlns:tns="urn:ControllerService" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:ct="urn:CommonTypes">
+
+	<xs:import namespace="urn:CommonTypes" schemaLocation="CommonTypes.xsd" />
+
+	<xs:complexType name="experimentEnded">
+		<xs:sequence />
+	</xs:complexType>
+
+	<xs:complexType name="receive">
+		<xs:sequence>
+			<xs:element name="msg" type="ct:message" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="receiveNotification">
+		<xs:sequence>
+			<xs:element name="msg" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="receiveStatus">
+		<xs:sequence>
+			<xs:element name="status" type="tns:requestStatus" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="requestStatus">
+		<xs:sequence>
+			<xs:element name="requestId" type="ct:requestId" minOccurs="1" maxOccurs="1" />
+			<xs:element name="status" type="tns:status" nillable="true" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="status">
+		<xs:sequence>
+			<xs:element name="nodeId" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="value" type="xs:int" minOccurs="0" maxOccurs="1" />
+			<xs:element name="msg" type="xs:string" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="experimentEnded" type="tns:experimentEnded" />
+	<xs:element name="receive" type="tns:receive" />
+	<xs:element name="receiveNotification" type="tns:receiveNotification" />
+	<xs:element name="receiveStatus" type="tns:receiveStatus" />
+	<xs:element name="requestStatus" type="tns:requestStatus" />
+
+</xs:schema>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Author: Dennis Pfisterer, http://www.itm.uni-luebeck.de/users/pfisterer/, 2005 -->
+
+<project basedir="./" default="allbinary" name="jshawn">
+	<property name="projectname" value="jshawn"/>
+	<property name="backupdir" value="backup/"/>
+	<property name="shawndir" value="../../"/>
+	<property name="test_class_name" value="sf.net.shawn.Main"/>
+
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<!-- set global properties for this build  -->
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<property name="src" value="src/"/>
+	<property name="doc" value="doc/"/>
+	<property name="class" value="bin/ant"/>
+	<property name="lib" value="lib/"/>
+	<property name="dist" value="dist/"/>
+
+    <property name="optimize" value="true"/>
+	<property name="java.debug" value="false"/>
+
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<!-- internal parameters  -->
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<property name="jarfile" value="${dist}/${projectname}.jar"/>
+	<property name="onejarfile" value="${dist}/${projectname}-allinone.jar"/>
+	<property name="srcjarfile" value="${dist}/${projectname}-source.jar"/>
+	<property name="onejarboot" value="one-jar-boot-0.95.jar" />
+	
+	<path id="runclasspath">
+		<pathelement location="${jarfile}" />
+		<fileset dir="${lib}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<!-- ALL  -->
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<target name="allbinary" depends="cleanup,compile,bindist,cp2shawn"/>
+	<target name="all" depends="cleanup,compile,dist,cp2shawn"/>
+  
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<!-- Set up some things -->
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<target name="init">
+		<tstamp>
+			<format property="MYDATE" pattern="yyyy_MM_dd" locale="en"/>
+		</tstamp>
+		
+		<mkdir dir="${dist}"/>
+		<mkdir dir="${class}"/>
+		<mkdir dir="${doc}"/>
+	</target>
+		 
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<!-- Copy to shawn dir  -->
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<target name="cp2shawn">
+		<copy file="${onejarfile}" todir="${shawndir}" 
+			failonerror="false"
+			overwrite="true"
+			verbose="true"
+		/>
+	</target>
+	
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<!-- Cleanup  -->
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<target name="cleanup">
+			<delete dir="${doc}"/>
+			<delete dir="${class}"/>
+			<delete dir="${tmp}"/>
+			
+			<delete>
+				<fileset dir="${src}" includes="**/*.class"/>
+			</delete>
+			
+	</target>
+	 
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<!-- Compile  -->
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<target name="compile" depends="init">
+		<javac 	destdir="${class}" 
+				srcdir="${src}" 
+				includes="**/*.java" 
+				classpathref="runclasspath" 
+				debug="${java.debug}" 
+				optimize="${optimize}"/>
+	</target>
+		 
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<!-- Tests and JUnit  -->
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<target name="test" depends="bindist">
+		<java classname="${test_class_name}" classpathref="runclasspath" fork="yes" />
+	</target>
+
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<!-- Create a jar file  -->
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<target name="dist" depends="bindist,srcdist"/>
+
+	<target name="onejar">
+        <!-- Create the onejar environment 
+             Conventions:   Main jar file of the app: main/main.jar
+                            Libs in lib/
+                            one jar boot stuff expanded in the root
+        -->
+        <delete dir="${dist}/onejar" failonerror="false" />
+		<mkdir dir="${dist}/onejar"/>
+		<mkdir dir="${dist}/onejar/main"/>
+		<mkdir dir="${dist}/onejar/lib"/>
+
+        <!-- Unjar the one jar bootstrap stuff -->
+        <unjar src="${onejarboot}" dest="${dist}/onejar"/>
+        
+        <!-- Create the main/main.jar file -->
+        <copy file="${jarfile}" tofile="${dist}/onejar/main/main.jar"/>
+
+        <!-- Create the lib/ dir -->
+        <copy todir="${dist}/onejar/lib">
+            <fileset dir="${lib}" includes="**/*"/>
+        </copy>        
+        
+        <!-- Build the one-jar file -->
+		<jar jarfile="${onejarfile}">
+            <manifest>
+                <attribute name="Main-Class" value="com.simontuffs.onejar.Boot"/>
+                <!--attribute name="One-Jar-Expand" value="expand,doc"/-->
+            </manifest>
+			<fileset dir="${dist}/onejar"/>
+		</jar>
+
+        <!-- Clean up -->
+        <delete dir="${dist}/onejar" failonerror="false" />
+        
+	</target>
+
+	<target name="bindist" depends="jarfile,onejar" />	
+	
+	<target name="jarfile" depends="compile">
+		<jar jarfile="${jarfile}">
+            <manifest>
+                <attribute name="Main-Class" value="${test_class_name}"/>
+            </manifest>
+			<fileset dir="${class}"/>
+			<fileset dir="${src}" excludes="**/*.java"/>
+		</jar>
+	</target>
+
+	<target name="srcdist" depends="compile,doc">
+		<jar jarfile="${srcjarfile}" basedir="./" index="true">
+			<include name="${src}/**/*.java"/>
+			<include name="${gen}/**/*.java"/>
+			<include name="${src}/**/*.properties"/>
+			<include name="${doc}/**/*"/>
+			<include name="build.xml"/>
+			<include name="castor_props.jar"/>
+			<include name="Doxyfile"/>
+			<include name="${schmema}"/>
+		</jar>
+	</target>
+	
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<!-- Backup  -->
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<target name="backup" depends="all">
+		<zip destfile="${backupdir}/${projectname}-${MYDATE}.zip" basedir="." update="false"/>		
+	</target>
+
+
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+	<!-- Documentation -->
+	<!-- +++++++++++++++++++++++++++++++++++++ -->
+
+	<target name="doc" depends="init">
+		
+              <javadoc packagenames="sf.net.shawn.*"
+                   sourcepath="${src}" 
+				   classpathref="runclasspath"
+                   destdir="${doc}/api"
+                   author="true"
+                   version="true"
+                   windowtitle="Project Documentation"
+	              	verbose="false">
+				   
+            	<doctitle><![CDATA[<h1>${projectname}</h1>]]></doctitle>
+            	<bottom><![CDATA[<i>Copyright &#169; 2005, Dennis Pfisterer, http://www.itm.uni-luebeck.de/users/pfisterer/</i>]]></bottom>
+          	</javadoc>
+	</target>
+
+</project>

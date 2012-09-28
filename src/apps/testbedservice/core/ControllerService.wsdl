@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions targetNamespace="urn:ControllerService"
+			 name="ControllerService" xmlns="http://schemas.xmlsoap.org/wsdl/"
+			 xmlns:tns="urn:ControllerService" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			 xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+	<types>
+		<xsd:schema>
+			<xsd:import namespace="urn:ControllerService" schemaLocation="ControllerTypes.xsd" />
+		</xsd:schema>
+	</types>
+
+	<message name="experimentEnded">
+		<part name="parameters" element="tns:experimentEnded" />
+	</message>
+	<message name="receive">
+		<part name="parameters" element="tns:receive" />
+	</message>
+	<message name="receiveNotification">
+		<part name="parameters" element="tns:receiveNotification" />
+	</message>
+	<message name="receiveStatus">
+		<part name="parameters" element="tns:receiveStatus" />
+	</message>
+
+	<portType name="Controller">
+		<operation name="experimentEnded">
+			<input message="tns:experimentEnded" />
+		</operation>
+		<operation name="receive">
+			<input message="tns:receive" />
+		</operation>
+		<operation name="receiveNotification">
+			<input message="tns:receiveNotification" />
+		</operation>
+		<operation name="receiveStatus">
+			<input message="tns:receiveStatus" />
+		</operation>
+	</portType>
+
+	<binding name="ControllerPortBinding" type="tns:Controller">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+		<operation name="experimentEnded">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+		</operation>
+		<operation name="receive">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+		</operation>
+		<operation name="receiveNotification">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+		</operation>
+		<operation name="receiveStatus">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+		</operation>
+	</binding>
+
+	<service name="ControllerService">
+		<port name="ControllerPort" binding="tns:ControllerPortBinding">
+			<soap:address location="REPLACE_WITH_ACTUAL_URL" />
+		</port>
+	</service>
+
+</definitions>

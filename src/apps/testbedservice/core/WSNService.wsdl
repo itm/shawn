@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions targetNamespace="urn:WSNService"
+			 name="WSNService" xmlns="http://schemas.xmlsoap.org/wsdl/"
+			 xmlns:tns="urn:WSNService"
+			 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			 xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+			 xmlns:ct="urn:CommonTypes">
+
+	<types>
+		<xsd:schema>
+			<xsd:import namespace="urn:CommonTypes" schemaLocation="CommonTypes.xsd" />
+			<xsd:import namespace="urn:WSNService" schemaLocation="WSNTypes.xsd" />
+		</xsd:schema>
+	</types>
+
+	<!--
+	<message name="addController">
+		<part name="parameters" element="tns:addController"/>
+	</message>
+	<message name="addControllerResponse">
+		<part name="parameters" element="tns:addControllerResponse"/>
+	</message>
+	-->
+	<message name="areNodesAlive">
+		<part name="parameters" element="tns:areNodesAlive" />
+	</message>
+	<message name="areNodesAliveResponse">
+		<part name="parameters" element="tns:areNodesAliveResponse" />
+	</message>
+	<message name="destroyVirtualLink">
+		<part name="parameters" element="tns:destroyVirtualLink" />
+	</message>
+	<message name="destroyVirtualLinkResponse">
+		<part name="parameters" element="tns:destroyVirtualLinkResponse" />
+	</message>
+	<message name="disableNode">
+		<part name="parameters" element="tns:disableNode" />
+	</message>
+	<message name="disableNodeResponse">
+		<part name="parameters" element="tns:disableNodeResponse" />
+	</message>
+	<message name="disablePhysicalLink">
+		<part name="parameters" element="tns:disablePhysicalLink" />
+	</message>
+	<message name="disablePhysicalLinkResponse">
+		<part name="parameters" element="tns:disablePhysicalLinkResponse" />
+	</message>
+	<message name="enableNode">
+		<part name="parameters" element="tns:enableNode" />
+	</message>
+	<message name="enableNodeResponse">
+		<part name="parameters" element="tns:enableNodeResponse" />
+	</message>
+	<message name="enablePhysicalLink">
+		<part name="parameters" element="tns:enablePhysicalLink" />
+	</message>
+	<message name="enablePhysicalLinkResponse">
+		<part name="parameters" element="tns:enablePhysicalLinkResponse" />
+	</message>
+	<message name="flashPrograms">
+		<part name="parameters" element="tns:flashPrograms" />
+	</message>
+	<message name="flashProgramsResponse">
+		<part name="parameters" element="tns:flashProgramsResponse" />
+	</message>
+	<message name="getFilters">
+		<part name="parameters" element="tns:getFilters" />
+	</message>
+	<message name="getFiltersResponse">
+		<part name="parameters" element="tns:getFiltersResponse" />
+	</message>
+	<message name="getSupportedChannelHandlers">
+		<part name="parameters" element="tns:getSupportedChannelHandlers" />
+	</message>
+	<message name="getSupportedChannelHandlersResponse">
+		<part name="parameters" element="tns:getSupportedChannelHandlersResponse" />
+	</message>
+	<message name="getNetwork">
+		<part name="parameters" element="ct:getNetwork" />
+	</message>
+	<message name="getNetworkResponse">
+		<part name="parameters" element="ct:getNetworkResponse" />
+	</message>
+	<message name="getVersion">
+		<part name="parameters" element="tns:getVersion" />
+	</message>
+	<message name="getVersionResponse">
+		<part name="parameters" element="tns:getVersionResponse" />
+	</message>
+	<!--
+	<message name="removeController">
+		<part name="parameters" element="tns:removeController"/>
+	</message>
+	<message name="removeControllerResponse">
+		<part name="parameters" element="tns:removeControllerResponse"/>
+	</message>
+	-->
+	<message name="resetNodes">
+		<part name="parameters" element="tns:resetNodes" />
+	</message>
+	<message name="resetNodesResponse">
+		<part name="parameters" element="tns:resetNodesResponse" />
+	</message>
+	<message name="send">
+		<part name="parameters" element="tns:send" />
+	</message>
+	<message name="sendResponse">
+		<part name="parameters" element="tns:sendResponse" />
+	</message>
+	<message name="setChannelPipeline">
+		<part name="parameters" element="tns:setChannelPipeline" />
+	</message>
+	<message name="setChannelPipelineResponse">
+		<part name="parameters" element="tns:setChannelPipelineResponse" />
+	</message>
+	<message name="setVirtualLink">
+		<part name="parameters" element="tns:setVirtualLink" />
+	</message>
+	<message name="setVirtualLinkResponse">
+		<part name="parameters" element="tns:setVirtualLinkResponse" />
+	</message>
+
+	<portType name="WSN">
+		<!--
+		<operation name="addController">
+			<input message="tns:addController"/>
+			<output message="tns:addControllerResponse"/>
+		</operation>
+		-->
+		<operation name="areNodesAlive">
+			<input message="tns:areNodesAlive" />
+			<output message="tns:areNodesAliveResponse" />
+		</operation>
+		<operation name="destroyVirtualLink">
+			<input message="tns:destroyVirtualLink" />
+			<output message="tns:destroyVirtualLinkResponse" />
+		</operation>
+		<operation name="disableNode">
+			<input message="tns:disableNode" />
+			<output message="tns:disableNodeResponse" />
+		</operation>
+		<operation name="disablePhysicalLink">
+			<input message="tns:disablePhysicalLink" />
+			<output message="tns:disablePhysicalLinkResponse" />
+		</operation>
+		<operation name="enableNode">
+			<input message="tns:enableNode" />
+			<output message="tns:enableNodeResponse" />
+		</operation>
+		<operation name="enablePhysicalLink">
+			<input message="tns:enablePhysicalLink" />
+			<output message="tns:enablePhysicalLinkResponse" />
+		</operation>
+		<operation name="flashPrograms">
+			<input message="tns:flashPrograms" />
+			<output message="tns:flashProgramsResponse" />
+		</operation>
+		<operation name="getSupportedChannelHandlers">
+			<input message="tns:getSupportedChannelHandlers" />
+			<output message="tns:getSupportedChannelHandlersResponse" />
+		</operation>
+		<operation name="getFilters">
+			<input message="tns:getFilters" />
+			<output message="tns:getFiltersResponse" />
+		</operation>
+		<operation name="getNetwork">
+			<input message="tns:getNetwork" />
+			<output message="tns:getNetworkResponse" />
+		</operation>
+		<operation name="getVersion">
+			<input message="tns:getVersion" />
+			<output message="tns:getVersionResponse" />
+		</operation>
+		<!--
+		<operation name="removeController">
+			<input message="tns:removeController"/>
+			<output message="tns:removeControllerResponse"/>
+		</operation>
+		-->
+		<operation name="resetNodes">
+			<input message="tns:resetNodes" />
+			<output message="tns:resetNodesResponse" />
+		</operation>
+		<operation name="send">
+			<input message="tns:send" />
+			<output message="tns:sendResponse" />
+		</operation>
+		<operation name="setChannelPipeline">
+			<input message="tns:setChannelPipeline" />
+			<output message="tns:setChannelPipelineResponse" />
+		</operation>
+		<operation name="setVirtualLink">
+			<input message="tns:setVirtualLink" />
+			<output message="tns:setVirtualLinkResponse" />
+		</operation>
+	</portType>
+
+	<binding name="WSNPortBinding" type="tns:WSN">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+		<!--
+		<operation name="addController">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+		-->
+		<operation name="areNodesAlive">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="destroyVirtualLink">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="disableNode">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="disablePhysicalLink">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="enableNode">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="enablePhysicalLink">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="flashPrograms">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="getSupportedChannelHandlers">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="getFilters">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="getNetwork">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="getVersion">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<!--
+		<operation name="removeController">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+		-->
+		<operation name="resetNodes">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="send">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="setChannelPipeline">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="setVirtualLink">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+	</binding>
+
+	<service name="WSNService">
+		<port name="WSNPort" binding="tns:WSNPortBinding">
+			<soap:address location="REPLACE_WITH_ACTUAL_URL" />
+		</port>
+	</service>
+
+</definitions>
+

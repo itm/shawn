@@ -1,0 +1,25 @@
+<topology>
+
+    <polygon type="outer">
+    
+        <!-- Here, all valid tags from shawn::Tag may be present -->
+        <tag type="double" name="material" value="1.0" />
+        
+        <vertex x="2117.41163264478" y="8044.34768255157"/>
+        <vertex x="2117.48762643993" y="8454.22570670335"/>
+        <vertex x="3268.4534325899" y="8573.10638444706"/> 
+    </polygon>
+
+    <polygon type="hole">
+    
+        <!-- Here, all valid tags from shawn::Tag may be present -->
+        
+        <vertex x="3287.62118775287" y="13646.0022118151"/>
+        <vertex x="4862.11689576203" y="12958.9956104826"/>
+        <vertex x="4293.52515754043" y="11767.3139256284"/>
+        <vertex x="3095.27629153908" y="11847.9885837907"/>
+        <vertex x="2725.59266336733" y="11966.2864374151"/>
+        
+    </polygon>
+
+</topology>

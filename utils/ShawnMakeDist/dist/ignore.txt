@@ -1,0 +1,21 @@
+//============
+// ShawnMakeDist ignore file
+//
+// All directories below will be ignored during the
+// package creation process
+//============
+
+
+// Don't pack Subversion directories
+.svn
+
+
+// Don't pack the buildfiles directory. It will be created within
+// the package by ShawnMakeDist, so a release package contains
+// an emptry buildfiles directory.
+buildfiles
+
+
+// Don't pack the jshawn directory. This is the new shawn wrapper for
+// java.
+jshawn

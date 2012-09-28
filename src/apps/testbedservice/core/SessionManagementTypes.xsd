@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema targetNamespace="urn:SessionManagementService"
+			version="1.0"
+			xmlns:tns="urn:SessionManagementService"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:ct="urn:CommonTypes">
+
+	<xs:import namespace="urn:CommonTypes" schemaLocation="CommonTypes.xsd"/>
+	
+	<xs:complexType name="areNodesAlive">
+		<xs:sequence>
+			<xs:element name="nodes" type="xs:string" nillable="true" minOccurs="1" maxOccurs="unbounded" />
+			<xs:element name="controllerEndpointUrl" type="xs:string" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="areNodesAliveResponse">
+		<xs:sequence>
+			<xs:element name="return" type="ct:requestId" maxOccurs="1" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="free">
+		<xs:sequence>
+			<xs:element name="secretReservationKey" type="tns:secretReservationKey" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="freeResponse">
+		<xs:sequence/>
+	</xs:complexType>
+
+	<xs:complexType name="getConfiguration">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="getConfigurationResponse">
+		<xs:sequence>
+			<xs:element name="rsEndpointUrl" type="xs:string"/>
+			<xs:element name="snaaEndpointUrl" type="xs:string"/>
+			<xs:element name="options" type="ct:KeyValuePair" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="getInstance">
+		<xs:sequence>
+			<xs:element name="secretReservationKey" type="tns:secretReservationKey" maxOccurs="unbounded"/>
+			<xs:element name="controller" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="getInstanceResponse">
+		<xs:sequence>
+			<xs:element name="return" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="secretReservationKey">
+		<xs:sequence>
+			<xs:element name="secretReservationKey" type="xs:string"/>
+			<xs:element name="urnPrefix" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ExperimentNotRunningException">
+		<xs:sequence>
+			<xs:element name="message" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="UnknownReservationIdException">
+		<xs:sequence>
+			<xs:element name="message" type="xs:string" minOccurs="0"/>
+			<xs:element name="reservationId" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="areNodesAlive" type="tns:areNodesAlive" />
+	<xs:element name="areNodesAliveResponse" type="tns:areNodesAliveResponse" />
+	<xs:element name="free" type="tns:free"/>
+	<xs:element name="freeResponse" type="tns:freeResponse"/>
+	<xs:element name="getConfiguration" type="tns:getConfiguration" />
+	<xs:element name="getConfigurationResponse" type="tns:getConfigurationResponse" />
+	<xs:element name="getInstance" type="tns:getInstance"/>
+	<xs:element name="getInstanceResponse" type="tns:getInstanceResponse"/>
+	<xs:element name="ExperimentNotRunningException" type="tns:ExperimentNotRunningException"/>
+	<xs:element name="UnknownReservationIdException" type="tns:UnknownReservationIdException"/>
+	
+</xs:schema>
