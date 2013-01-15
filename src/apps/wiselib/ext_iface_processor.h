@@ -54,9 +54,16 @@ namespace wiselib
 
          void set_link_metric( uint16_t lm )
          { link_metric_ = lm; };
+         
+         uint16_t destination() const
+         { return destination_; };
+
+         void set_destination( uint16_t dest )
+         { destination_ = dest; };
 
       private:
          uint16_t link_metric_;
+         uint16_t destination_;
       };
       // --------------------------------------------------------------------
       typedef delegate3<void, node_id_t, size_t, block_data_t*> shawn_radio_delegate_t;
