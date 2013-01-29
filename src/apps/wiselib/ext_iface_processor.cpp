@@ -63,6 +63,7 @@ namespace wiselib
                 double const dist=std::sqrt((vx-ux)*(vx-ux)+(vy-uy)*(vy-uy)+(vz-uz)*(vz-uz));
                 ExtendedData ex;
                 ex.set_link_metric((0xffff*dist/owner_w().transmission_range())+0.5);
+                ex.set_destination(message->destination());
                 for ( ExtendedReceiverListIterator
                          it = ext_delegates_.begin();
                          it != ext_delegates_.end();
