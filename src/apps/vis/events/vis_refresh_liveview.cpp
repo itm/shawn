@@ -25,7 +25,7 @@ namespace vis
     refresh_interval_(refresh_interval)
    {
 #ifdef HAVE_BOOST
-      boost::xtime_get(&last_refresh_, TIME_UTC);
+      boost::xtime_get(&last_refresh_, boost::TIME_UTC);
       last_refresh_.sec -= 1;
       boost::mutex::scoped_lock lock(*getUpdateMutex());
 #endif
@@ -55,7 +55,7 @@ namespace vis
 	  // Sleeps until next refresh (if needed, maybe already reached).
       boost::thread::sleep(last_refresh_);
 	  // Start refresh and mark current time as time of last refresh.
-      boost::xtime_get(&last_refresh_, TIME_UTC);
+      boost::xtime_get(&last_refresh_, boost::TIME_UTC);
 	  // Lock the texture update mutex!
       boost::mutex::scoped_lock lock(*getUpdateMutex());
 #endif
