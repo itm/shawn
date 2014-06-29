@@ -40,8 +40,7 @@ namespace tcpip
 	// ----------------------------------------------------------------------
 	Storage::Storage(const unsigned char packet[], int length)
 	{
-		// Length is calculated, if -1, or given
-		if (length == -1) length = sizeof(packet) / sizeof(unsigned char);
+		assert(length >= 0);
 
 		store.reserve(length);
 		// Get the content
