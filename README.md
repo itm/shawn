@@ -24,3 +24,7 @@ The following is a really quick start guide for the faint at heart using Linux o
 - Run "./shawn"
 
 [1]	A. Kroeller, D. Pfisterer, C. Buschmann, S.P. Fekete, S. Fischer: "Shawn: A new approach to simulating wireless sensor networks", Proceedings of the Design, Analysis, and Simulation of Distributed Systems (DASD 05), San Diego, 2005.
+
+Run with docker and Web UI
+-------------
+https://github.com/lsfiege/shawnweb
